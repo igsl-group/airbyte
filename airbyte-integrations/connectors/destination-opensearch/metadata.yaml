@@ -1,0 +1,27 @@
+data:
+  connectorSubtype: api
+  connectorType: destination
+  definitionId: 34228fbb-1481-4cda-ab11-1341f8d20680
+  dockerImageTag: 0.1.6
+  dockerRepository: airbyte/destination-opensearch
+  githubIssueLabel: destination-opensearch
+  icon: opensearch.svg
+  license: MIT
+  name: OpenSearch
+  registryOverrides:
+    cloud:
+      enabled: false
+    oss:
+      enabled: false
+  releaseStage: alpha
+  documentationUrl: https://docs.airbyte.com/integrations/destinations/opensearch
+  tags:
+    - language:java
+  ab_internal:
+    sl: 100
+    ql: 100
+  supportLevel: community
+  connectorTestSuitesOptions:
+    - suite: unitTests
+    - suite: integrationTests
+metadataSpecVersion: "1.0"
