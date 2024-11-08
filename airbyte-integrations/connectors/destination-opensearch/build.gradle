@@ -19,7 +19,7 @@ java {
 airbyteJavaConnector.addCdkDependencies()
 
 application {
-    mainClass = 'io.airbyte.integrations.destination.opensearch.OpensearchDestination'
+    mainClass = 'io.airbyte.integrations.destination.opensearch.OpenSearchDestination'
     applicationDefaultJvmArgs = ['-XX:+ExitOnOutOfMemoryError', '-XX:MaxRAMPercentage=75.0']
 }
 
