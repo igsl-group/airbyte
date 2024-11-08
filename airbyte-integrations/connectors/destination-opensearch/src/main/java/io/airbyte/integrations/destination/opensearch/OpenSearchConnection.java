@@ -24,7 +24,7 @@ import org.opensearch.client.opensearch.indices.*;
 import com.fasterxml.jackson.core.JsonPointer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.airbyte.db.util.SSLCertificateUtils;
+import io.airbyte.cdk.db.util.SSLCertificateUtils;
 import io.airbyte.protocol.models.v0.AirbyteRecordMessage;
 
 import java.io.IOException;

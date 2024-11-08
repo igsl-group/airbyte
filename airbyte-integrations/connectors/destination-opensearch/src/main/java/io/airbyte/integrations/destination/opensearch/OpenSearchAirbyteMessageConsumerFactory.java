@@ -6,13 +6,13 @@ package io.airbyte.integrations.destination.opensearch;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.airbyte.commons.concurrency.VoidCallable;
-import io.airbyte.commons.functional.CheckedConsumer;
 import io.airbyte.commons.functional.CheckedFunction;
-import io.airbyte.integrations.base.AirbyteMessageConsumer;
-import io.airbyte.integrations.destination.buffered_stream_consumer.BufferedStreamConsumer;
-import io.airbyte.integrations.destination.buffered_stream_consumer.RecordWriter;
-import io.airbyte.integrations.destination.record_buffer.InMemoryRecordBufferingStrategy;
+import io.airbyte.cdk.integrations.base.AirbyteMessageConsumer;
+import io.airbyte.cdk.integrations.destination.buffered_stream_consumer.BufferedStreamConsumer;
+import io.airbyte.cdk.integrations.destination.buffered_stream_consumer.OnCloseFunction;
+import io.airbyte.cdk.integrations.destination.buffered_stream_consumer.OnStartFunction;
+import io.airbyte.cdk.integrations.destination.buffered_stream_consumer.RecordWriter;
+import io.airbyte.cdk.integrations.destination.record_buffer.InMemoryRecordBufferingStrategy;
 import io.airbyte.protocol.models.v0.AirbyteMessage;
 import io.airbyte.protocol.models.v0.AirbyteRecordMessage;
 import io.airbyte.protocol.models.v0.ConfiguredAirbyteCatalog;
@@ -61,7 +61,7 @@ public class OpenSearchAirbyteMessageConsumerFactory {
     return jsonNode -> true;
   }
 
-  private static CheckedConsumer<Boolean, Exception> onCloseFunction(final OpenSearchConnection connection) {
+  private static OnCloseFunction onCloseFunction(final OpenSearchConnection connection) {
 
     return (hasFailed) -> {
       if (!tempIndices.isEmpty() && !hasFailed) {
@@ -117,7 +117,7 @@ public class OpenSearchAirbyteMessageConsumerFactory {
     return errorReport;
   }
 
-  private static VoidCallable onStartFunction(final OpenSearchConnection connection, final List<OpenSearchWriteConfig> writeConfigs) {
+  private static OnStartFunction onStartFunction(final OpenSearchConnection connection, final List<OpenSearchWriteConfig> writeConfigs) {
     return () -> {
       for (final var config : writeConfigs) {
         if (config.useTempIndex()) {
